@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
+ * @Vich\Uploadable()
  */
 class Picture
 {
@@ -31,12 +32,12 @@ class Picture
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable = true)
      */
     private $picture;
 
     /**
-     * @Vich\UploadableField(mapping="images", fileNameProperty="picture")
+     * @Vich\UploadableField(mapping="toiles", fileNameProperty="picture")
      * @Assert\File(
      * maxSize="1000k",
      * maxSizeMessage="Le fichier excède 1000Ko.",
@@ -96,7 +97,7 @@ class Picture
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
@@ -106,16 +107,16 @@ class Picture
     /**
      * @return null|string
      */
-    public function getPictureFile(): ?string
+    public function getPictureFile(): ?File
     {
         return $this->pictureFile;
     }
 
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $PictureFile
-     * @return ArtisticWork
+     * @return Picture
      */
-    public function setPictureFile(string $pictureFile): self
+    public function setPictureFile(?File $pictureFile): Picture
     {
         $this->pictureFile = $pictureFile;
         if ($this->pictureFile instanceof UploadedFile) {

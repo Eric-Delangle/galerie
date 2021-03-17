@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Picture
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Insérer une toile</h1>
+
+		{{ include('admin/picture/_form.html.twig') }}
+
+		<a href="{{ path('admin_picture_index') }}">Retour à la liste</a>
+	</div>
+	<script>
+		document.getElementById('inscription').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('connexion').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('admin').style.display = 'block';
+	</script>
+	<script>
+		document.getElementById('deconnexion').style.display = 'block';
+	</script>
+	<script>
+		document.getElementById('member').style.display = 'none';
+	</script>
+{% endblock %}

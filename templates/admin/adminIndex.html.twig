@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	Espace administration
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h1>Salut admin</h1>
+		<ul class="navbar-nav">
+			<li lass="nav-item">
+				<a class="nav-link" id="adminImage" href="{{ path('admin_picture_index') }}" tabindex="-1" aria-disabled="true">
+					<i class="fas fa-utensils"></i>
+					Les toiles</a>
+			</li>
+			<li lass="nav-item">
+				<a class="nav-link" id="commande" href="{{ path('security_login') }}" tabindex="-1" aria-disabled="true">
+					<i class="fas fa-sign-in-alt black"></i>
+					Les commandes</a>
+			</li>
+		</ul>
+	</div>
+	<script>
+		document.getElementById('inscription').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('connexion').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('admin').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('member').style.display = 'block';
+	</script>
+	<script>
+		document.getElementById('deconnexion').style.display = 'block';
+	</script>
+
+{% endblock %}

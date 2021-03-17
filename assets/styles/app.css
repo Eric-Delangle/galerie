@@ -1,3 +1,13 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
+}
+
+.images {
+  width: 300px;
+  height: auto;
+}
+
+.imagesAgrandies {
+  width: 900px;
+  height: auto;
 }

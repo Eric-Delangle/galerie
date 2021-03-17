@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des toiles
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Gestion des toiles</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Slug</th>
+					<th>Picture</th>
+					<th>CreatedAt</th>
+					<th>UpdatedAt</th>
+					<th>Description</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for picture in pictures %}
+					<tr>
+						<td>{{ picture.id }}</td>
+						<td>{{ picture.name }}</td>
+						<td>{{ picture.slug }}</td>
+						<td>{{ picture.picture }}</td>
+						<td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ picture.description }}</td>
+						<td>
+							<a href="{{ path('picture_show', {'id': picture.id}) }}">Voir la toile</a>
+							<a href="{{ path('picture_edit', {'id': picture.id}) }}">Modifier la toile</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Pas de toiles enregistrées.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('picture_new') }}">Nouvelle toile</a>
+	</div>
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('espace_membre').style.display = 'none';
+		</script>
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('admin').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('map').style.display = 'block';
+		</script>
+	{% endif %}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Picture;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +24,7 @@ class PictureType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ArtisticWork::class,
+            'data_class' => Picture::class,
             'translation_domain' => 'forms',
         ]);
     }
