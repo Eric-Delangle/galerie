@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos achats
+{% endblock %}
+
+{% block body %}
+	<div class="container text-center mt-5">
+		<h1>Vos achats</h1>
+		<table class="table mt-3">
+			<thead>
+				<tr>
+					<th>Nom de l'œuvre</th>
+					<th>image</th>
+					<th>Description</th>
+					<th>Prix</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if items %}
+					{% for item in items %}
+						<tr>
+							<td>
+								<strong>{{ item.picture.name | capitalize }}</strong>
+							</td>
+							<td><img src=" {{ asset(['images/toiles/', item.picture.picture]|join) }} " class="images" alt="oeuvre"></td>
+							<td>{{ item.picture.description }}</td>
+							<td>
+								<strong>{{ item.picture.price // 10 }}
+									€</strong>
+							</td>
+							<td>
+								<button class="btn btn-danger btn-sm bouton">
+									<a href="{{ path('cart_delete',{'id': item.picture.id}) }}" class="navlink">
+										<i class="fas fa-trash-alt"></i>
+										Finalement je n'en veux pas.</a>
+								</button>
+							</td>
+						</tr>
+
+					{% endfor %}
+				{% else %}
+					<p>Aucune oeuvre convoitée.</p>
+				{% endif %}
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3">
+						<h2>Total :</h2>
+					</td>
+					<td>
+						<h2>
+							<strong>{{ total }}
+								€</strong>
+						</h2>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('member').style.display = 'none';
+		</script>
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('admin').style.display = 'block';
+		</script>
+	{% endif %}
+{% endblock %}

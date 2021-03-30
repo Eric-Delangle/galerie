@@ -4,17 +4,31 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container text-center mt-5">
 		<h1>Voici en détail
 			{{ picture.name }}</h1>
 
 
 		<h2>Description :
 			{{ picture.description }}</h2>
+		<p>Son format est de
+			{{ picture.size}}</p>
+		<p>Vous pouvez acquérir cette œuvre pour la somme de
+			{{ picture.price // 10 }}
+			€.
+			<br>
+			Si ce prix ne vous convient pas vous pouvez toujours me faire une proposition par email.
+		</p>
 		<img src=" {{ asset(['images/toiles/', picture.picture]|join) }} " class="imagesAgrandies" alt="oeuvre">
 		<br>
-		<a href="{{ path('picture_index') }}">Retour à la galerie.</a>
-
+		<div class="col mt-3">
+			<button class="btn btn-primary bouton">
+				<a href="{{ path('picture_index') }}">Retour à la galerie.</a>
+			</button>
+			<button class="btn btn-success bouton">
+				<a href="{{ path('cart_add', {'id': picture.id}) }}">Laissez vous tenter.</a>
+			</button>
+		</div>
 
 	</div>
 	{% if app.user %}

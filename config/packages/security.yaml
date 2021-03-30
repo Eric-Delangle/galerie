@@ -22,7 +22,7 @@ security:
       form_login:
         login_path: security_login
         check_path: security_login
-        default_target_path: member_account
+        default_target_path: home_base
       logout:
         path: security_logout
         target: home_base
@@ -40,4 +40,4 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/member_account, roles: ROLE_USER }
+    - { path: ^/member, roles: ROLE_USER }

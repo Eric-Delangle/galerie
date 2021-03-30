@@ -34,6 +34,7 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $slug = $slugify->slugify($user->getFirstName() . '' . $user->getLastName());
             $user->setSlug($slug);
+            $user->setRoles(["ROLE_USER"]);
             $manager->persist($user);
             $manager->flush();
             $this->addFlash('success', 'Votre compte a bien été créé');
@@ -63,5 +64,6 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
+        $this->addFlash('success', 'Vous êtes bien déconnecté(e).');
     }
 }

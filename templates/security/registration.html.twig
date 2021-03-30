@@ -17,10 +17,15 @@
 			<div class="col">
 
 				{{ form_start(form)}}
+				{{ form_row(form.firstName, {'attr': {'placeholder': "Votre prénom"}})}}
+				{{ form_row(form.lastName, {'attr': {'placeholder': "Votre nom"}})}}
 				{{ form_rest(form)}}
 				{{ form_end(form)}}
 
 			</div>
+			<script>
+				document.getElementById("app").style.display = 'none';
+			</script>
 			<script>
 				document.getElementById('inscription').style.display = 'none';
 			</script>

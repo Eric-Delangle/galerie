@@ -1,13 +1,121 @@
+@font-face {
+  font-family: "alexbrush";
+  src: url("/assets/styles/fonts/alexbrush-regular-webfont.woff2")
+      format("woff2"),
+    url("/assets/styles/fonts/alexbrush-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  background-color: lightgray;
+  background-color: rgb(247, 245, 245);
+  color: #6a686f !important;
+  margin: 0 !important;
+}
+
+h1,
+h2 {
+  color: #6a686f !important;
+}
+
+#bloc-images {
+  background-color: #f5f5f5;
+  width: 100%;
+  padding: 30px 0px;
+}
+
+#portfolio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+  column-gap: 20px;
+}
+
+figure {
+  position: relative;
+  max-width: 400px;
+  max-height: 200px;
+}
+
+figcaption {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  margin-top: -60px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: none;
+  cursor: pointer;
+}
+
+.titre-legende {
+  padding: 3px;
+  line-height: 0.2;
+}
+
+canvas {
+  max-width: 100%;
+}
+
+h1 {
+  font-family: alexbrush, century, arial !important;
+  font-size: 4.5em !important;
+}
+
+.h3,
+h3 {
+  font-family: alexbrush, century, arial !important;
+  font-size: 2em !important;
+  color: #ffffff !important;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.brun {
+  color: #5b3504 !important;
+}
+
+.app {
+  position: absolute;
+}
+
+.navbar {
+  background-color: #6a686f !important;
+  color: #ffffff !important;
+}
+
+.navbar a {
+  color: #ffffff !important;
+}
+
+.navbar a:hover {
+  color: #5b3504 !important;
 }
 
 .images {
-  width: 300px;
-  height: auto;
+  max-width: 400px;
+  max-height: 200px;
+  cursor: pointer;
+}
+
+.imagesMin {
+  max-width: 150px;
+  max-height: 75px;
+  cursor: pointer;
 }
 
 .imagesAgrandies {
-  width: 900px;
+  width: 600px;
   height: auto;
+}
+
+/* les boutons */
+.bouton a {
+  color: white !important;
+  text-decoration: none !important;
 }

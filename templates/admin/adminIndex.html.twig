@@ -4,7 +4,8 @@
 {% endblock %}
 {% block body %}
 	<div class="container">
-		<h1>Salut admin</h1>
+		<h1 class="brun mt-3">Salut
+			{{app.user.firstName | capitalize}}</h1>
 		<ul class="navbar-nav">
 			<li lass="nav-item">
 				<a class="nav-link" id="adminImage" href="{{ path('admin_picture_index') }}" tabindex="-1" aria-disabled="true">

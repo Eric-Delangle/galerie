@@ -4,26 +4,38 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1 class="text-center mt-3">La galerie</h1>
+
+	<div id="#bloc-images" class="container">
+		<h1 class="text-center mt-3 brun">La galerie</h1>
+
+		<div id="portfolio">
+			{% for picture in pictures %}
+
+				<figure class="images">
+					<a href="{{ path('picture_show', {'id': picture.id}) }}"><img src=" {{ asset(['images/toiles/', picture.picture]|join) }} " class="images" alt="oeuvre"></a>
+					<figcaption>
+						<div class="titre-legende text-center">
+							<h3>{{ picture.name | capitalize}}</h3>
+							<p>{{ picture.description | capitalize}}</p>
+
+						</div>
+					</figcaption>
+				</figure>
+
+			{% else %}
+
+				<p>Pas d'œuvres trouvées</p>
+
+			{% endfor %}
 
 
-		{% for picture in pictures %}
-
-			{{ picture.name }}
-			<img src=" {{ asset(['images/toiles/', picture.picture]|join) }} " class="images" alt="oeuvre">
-			{{ picture.description }}
-
-			<a href="{{ path('picture_show', {'id': picture.id}) }}">Voir</a>
-
-		{% else %}
-
-			<p>Pas d'oeuvres trouvées</p>
-
-		{% endfor %}
+		</div>
 
 
 	</div>
+	<script>
+		document.getElementById('app').style.display = 'none';
+	</script>
 	{% if app.user %}
 		<script>
 			document.getElementById('inscription').style.display = 'none';
@@ -56,8 +68,6 @@
 		<script>
 			document.getElementById('admin').style.display = 'block';
 		</script>
-		<script>
-			document.getElementById('map').style.display = 'block';
-		</script>
 	{% endif %}
+
 {% endblock %}

@@ -63,6 +63,18 @@ class Picture
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $size;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $price;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -158,6 +170,30 @@ class Picture
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSize(): ?string
+    {
+        return $this->size;
+    }
+
+    public function setSize(?string $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
