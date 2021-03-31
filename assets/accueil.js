@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Group, WebGLRenderer } from "three";
+import { Group, Clock } from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
@@ -8,7 +8,8 @@ let camera, scene, renderer;
 
 			init();
 			animate();
-
+			follow();
+		
 			function init( ) {
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -109,6 +110,7 @@ let camera, scene, renderer;
 
 				window.addEventListener( 'resize', onWindowResize );
 
+
 			} // end init
 
 			function onWindowResize() {
@@ -122,8 +124,8 @@ let camera, scene, renderer;
 
 			function animate() {
 
-				requestAnimationFrame( animate, follow );
-
+				requestAnimationFrame(animate);
+					
 				render();
 
 			}
@@ -133,23 +135,25 @@ let camera, scene, renderer;
 				renderer.render( scene, camera );
 
 			}
-	// pour que l'animation suive la souris
-    let mouseX = 0;
-    window.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-    })
 
-   function follow() {
-    const group = new Group();
-        const ratio = (mouseX / window.innerWidth - 0.5) * 2;
-        group.rotation.y = ratio * Math.PI * 0.1;
-        group.rotation.x = ratio * Math.PI * 0.1;
-        group.rotation.z = ratio * Math.PI * 0.1;
-        group.rotateY(0.001 * Math.PI);
-        renderer.render(scene, camera);
-        //controls.update();
-        requestAnimationFrame(follow);
-    }
-   // follow();
+	// pour que l'animation suive la souris
+/*
+	let mouseX = 0;
+	window.addEventListener("mousemove", (e) => {
+		mouseX = e.clientX;
+	})
+
+	function follow() {
+		const clock = new Clock();
+		const controls = new OrbitControls(camera, renderer.domElement);
+		const time = clock.getElapsedTime();
+		renderer.render(scene, camera);
+		controls.update();
+		requestAnimationFrame(follow);
+		const group = new Group();
+		const ratio = (mouseX / window.innerWidth - 0.5) * 2;
+		group.rotation.y = ratio * Math.PI * 0.1;  
+	}
+*/
    
 /* fin animation 3D */

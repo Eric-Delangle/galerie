@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PurchaseController!
+{% endblock %}
+
+{% block body %}
+	<div class="container text-center mt-5">
+		{% for item in purchases %}
+			{{ item.fullName }}
+
+		{% else %}
+			<p>Pas de commandes en cours.</p>
+		{% endfor %}
+
+	</div>
+	<script>
+		document.getElementById('inscription').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('connexion').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('admin').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('member').style.display = 'block';
+	</script>
+	<script>
+		document.getElementById('deconnexion').style.display = 'block';
+	</script>
+
+{% endblock %}

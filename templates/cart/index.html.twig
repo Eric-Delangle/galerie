@@ -13,6 +13,7 @@
 					<th>image</th>
 					<th>Description</th>
 					<th>Prix</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,6 +28,13 @@
 							<td>
 								<strong>{{ item.picture.price // 10 }}
 									€</strong>
+							</td>
+							<td>
+								<button class="btn btn-success btn-sm bouton">
+									<a href="{{ path('purchase_new',{'id': item.picture.id}) }}" class="navlink">
+										<i class="fas fa-store"></i>
+										Commander.</a>
+								</button>
 							</td>
 							<td>
 								<button class="btn btn-danger btn-sm bouton">

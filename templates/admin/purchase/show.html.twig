@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des commandes
+{% endblock %}
+
+{% block body %}
+	<h1>Les commandes</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ purchase.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ purchase.fullName }}</td>
+			</tr>
+			<tr>
+				<th>Son adresse</th>
+				<td>{{ purchase.address }}</td>
+			</tr>
+			<tr>
+				<th>Code postal</th>
+				<td>{{ purchase.postalCode }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ purchase.city }}</td>
+			</tr>
+			<tr>
+				<th>Montant Total</th>
+				<td>{{ purchase.total }}</td>
+			</tr>
+			<tr>
+				<th>Status de la commande</th>
+				<td>{{ purchase.status }}</td>
+			</tr>
+			<tr>
+				<th>Utilisateur</th>
+				<td>{{ purchase.user }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('admin_purchase_index') }}">Liste des commandes</a>
+
+	<a href="{{ path('admin_purchase_edit', {'id': picture.id}) }}">Modifier cette commande</a>
+
+	{{ include('admin/purchase/_delete_form.html.twig') }}
+{% endblock %}
