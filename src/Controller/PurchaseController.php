@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\Purchase;
 use App\Cart\CartService;
 use App\Form\PurchaseType;
+use App\Purchase\PurchasePersister;
 use App\Repository\PictureRepository;
 use App\Repository\PurchaseRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,14 @@ class PurchaseController extends AbstractController
 {
 
     protected $purchaseRepo;
+    protected $persister;
+    protected $cartservice;
 
-    public function __construct(PurchaseRepository $purchaseRepo)
+    public function __construct(PurchaseRepository $purchaseRepo, PurchasePersister $persister, CartService $cartservice)
     {
         $this->purchaserepo = $purchaseRepo;
+        $this->persister = $persister;
+        $this->cartservice = $cartservice;
     }
 
     /**
@@ -38,37 +43,17 @@ class PurchaseController extends AbstractController
     /**
      * @Route("/purchase/new/{id}", name="purchase_new", methods={"GET","POST"})
      */
-    public function new(Request $request, PictureRepository $pictureRepo, $id, CartService $cartservice)
+    public function new($id, Request $request)
     {
 
-        $cart = $cartservice->getDetailedCartItems();
-
-        $user = $this->getUser();
-        $picture = $pictureRepo->find($id);
+        $cart = $this->cartservice->getDetailedCartItems();
         $purchase = new Purchase();
+        $this->persister->storePurchase($purchase);
         $form = $this->createForm(PurchaseType::class, $purchase);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
 
-            $purchase->setfullName('test');
-            $purchase->setAddress($user->getAddress());
-            $purchase->setPostalcode($user->getPostalcode());
-            $purchase->setCity($user->getCity());
-            $purchase->setTotal($picture->getPrice());
-            $purchase->setStatus(Purchase::STATUS_PENDING);
-            $purchase->setPurchasedAt(new DateTime());
-            $purchase->setUser($user);
-            dd($purchase);
-
-            $entityManager->persist($purchase);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('purchase_index');
-        }
-
-        return $this->render('purchase/new.html.twig', [
+        return $this->render('purchase/payment.html.twig', [
             'cart' => $cart,
             'purchase' => $purchase,
             'form' => $form->createView(),

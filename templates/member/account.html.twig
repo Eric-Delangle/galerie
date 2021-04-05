@@ -10,13 +10,36 @@
 			{{ user.lastName | capitalize}}</h1>
 	</div>
 	<div class="col text-center">
-		{{ user.adress | capitalize }}
-		{{ user.codePostal | capitalize }}
-		{{ user.location | capitalize }}
+		<p>Vous résidez
+			{{ user.adress | capitalize }}
+			{{ user.codePostal | capitalize }}
+			à
+			{{ user.location | capitalize }}</p>
 	</div>
+	<div class="col text-center mt-5">
+		{% if cart %}
+			<button class="btn btn-primary btn-sm bouton">
+				<a class="nav-link" id="inscription" href="{{ path('cart_show') }}" tabindex="-1" aria-disabled="true">
+					<i class="fas fa-heart"></i>
+					Vos achats</a>
+			</button>
 
-	<div class="col text-center">
-		<a class="bouton" id="" href="{{ path('user_edit', {'id': app.user.id}) }}"></div>
+		{% else %}
+			<p>Rien dans votre liste d'achat(s).</p>
+		{% endif %}
+		{% if purchase %}
+			<button class="btn btn-primary btn-sm bouton">
+				<a class="nav-link" id="inscription" href="{{ path('purchase_index') }}" tabindex="-1" aria-disabled="true">
+					<i class="fas fa-heart"></i>
+					Ce que vous avez commandé.</a>
+			</button>
+
+		{% else %}
+			<p>Vous n'avez encore rien commandé.</p>
+		{% endif %}
+		<div class="col text-center mt-3">
+			<a class="bouton btn btn-success btn-sm" id="" href="{{ path('user_edit', {'id': app.user.id}) }}">Modifier vos informations</a>
+		</div>
 
 		{% if app.user %}
 			<script>

@@ -3,12 +3,11 @@
 namespace App\Cart;
 
 use App\Repository\PictureRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService extends AbstractController
 {
-
     protected $session;
     protected $pictureRepo;
 
@@ -16,6 +15,21 @@ class CartService extends AbstractController
     {
         $this->session = $session;
         $this->pictureRepo = $pictureRepo;
+    }
+
+    protected function getCart(): array
+    {
+        return $this->session->get('cart', []);
+    }
+
+    protected function saveCart(array $cart)
+    {
+        $this->session->set('cart', $cart);
+    }
+
+    public function empty()
+    {
+        $this->saveCart([]);
     }
 
     public function add(int $id)
@@ -39,6 +53,36 @@ class CartService extends AbstractController
         //$request->getSession()->remove('cart');
     }
 
+
+    public function remove(int $id)
+    {
+        $cart = $this->getCart();
+
+        unset($cart[$id]);
+
+        $this->saveCart($cart);
+    }
+
+    public function decrement(int $id)
+    {
+        $cart = $this->getCart();
+
+        if (!array_key_exists($id, $cart)) {
+            return;
+        }
+
+        // Soit le produit est à 1 alors il faut simplement le supprimer
+        if ($cart[$id] === 1) {
+            $this->remove($id);
+            return;
+        }
+
+        // Soit le produit est à plus de 1, alors il faut décrémenter;
+        $cart[$id]--;
+
+        $this->saveCart($cart);
+    }
+
     public function getTotal(): int
     {
         $total = 0;
@@ -51,6 +95,9 @@ class CartService extends AbstractController
         return $total;
     }
 
+    /**
+     * @return CartItem[]
+     */
     public function getDetailedCartItems(): array
     {
         $detailedCart = [];
@@ -64,12 +111,5 @@ class CartService extends AbstractController
             ];
         }
         return $detailedCart;
-    }
-
-    public function remove(int $id)
-    {
-        $cart = $this->session->get('cart', []);
-        unset($cart[$id]);
-        $this->session->set('cart', $cart);
     }
 }

@@ -6,14 +6,29 @@
 {% block body %}
 	<div class="container">
 		<h1 class="text-center mt-3">Validez votre commande</h1>
-		{% for item in cart %}
-			{{ item.picture.name }}
-			<img src=" {{ asset(['images/toiles/', item.picture.picture]|join) }} " class="images" alt="oeuvre">
-			{{ item.picture.description }}
-			{{ item.picture.price // 10 }}
-			€
-			{{ include('purchase/_form.html.twig') }}
-		{% endfor %}
+		{% if app.user %}
+			{% for item in cart %}
+				{{ item.picture.name }}
+				<img src=" {{ asset(['images/toiles/', item.picture.picture]|join) }} " class="images" alt="oeuvre">
+				{{ item.picture.description }}
+				{{ item.picture.price // 10 }}
+				€
+				{{ include('purchase/_form.html.twig') }}
+				<button class="btn btn-success">
+					<a class="nav-link brun" id="" href="{{ path('security_login') }}" tabindex="-1" aria-disabled="true">C'est ok je commande</a>
+				</button>
+			{% endfor %}
+		{% else %}
+			<p class="text-center mt-3">Vous devez vous connecter pour commander :
+				<a class="nav-link brun" id="connexion" href="{{ path('security_login') }}" tabindex="-1" aria-disabled="true">
+					<i class="fas fa-sign-in-alt black"></i>
+					Connexion</a>
+				<a class="nav-link brun" id="inscription" href="{{ path('security_registration') }}" tabindex="-1" aria-disabled="true">
+					<i class="fas fa-user-circle"></i>
+					Inscription</a>
+			</p>
+		{% endif %}
+
 
 	</div>
 	{% if app.user %}

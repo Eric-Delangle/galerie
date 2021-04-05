@@ -5,13 +5,18 @@
 
 {% block body %}
 	<div class="container text-center mt-5">
+		<p>Voici vos commandes :</p>
 		{% for item in purchases %}
+
 			{{ item.fullName }}
+
 
 		{% else %}
 			<p>Pas de commandes en cours.</p>
 		{% endfor %}
-
+		<a class="nav-link" id="member" href="{{ path('member_account') }}" tabindex="-1" aria-disabled="true">
+			<i class="fas fa-home"></i>
+			Votre compte</a>
 	</div>
 	<script>
 		document.getElementById('inscription').style.display = 'none';

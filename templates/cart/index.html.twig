@@ -29,13 +29,7 @@
 								<strong>{{ item.picture.price // 10 }}
 									€</strong>
 							</td>
-							<td>
-								<button class="btn btn-success btn-sm bouton">
-									<a href="{{ path('purchase_new',{'id': item.picture.id}) }}" class="navlink">
-										<i class="fas fa-store"></i>
-										Commander.</a>
-								</button>
-							</td>
+
 							<td>
 								<button class="btn btn-danger btn-sm bouton">
 									<a href="{{ path('cart_delete',{'id': item.picture.id}) }}" class="navlink">
@@ -46,6 +40,7 @@
 						</tr>
 
 					{% endfor %}
+
 				{% else %}
 					<p>Aucune oeuvre convoitée.</p>
 				{% endif %}
@@ -62,11 +57,43 @@
 								€</strong>
 						</h2>
 					</td>
+
 				</tr>
 			</tfoot>
 		</table>
 	</div>
+	{% if not app.user %}
+		{% if items %}
+			<div class="container">
+				<p>Vous devez vous connecter pour pouvoir commander</p>
+				<p>
+					<a class="nav-link" id="inscription" href="{{ path('security_registration') }}" tabindex="-1" aria-disabled="true">
+						<i class="fas fa-user-circle"></i>
+						Inscription</a>
+					<a class="nav-link" id="connexion" href="{{ path('security_login') }}" tabindex="-1" aria-disabled="true">
+						<i class="fas fa-sign-in-alt black"></i>
+						Connexion</a>
+				</p>
+			</div>
+
+		{% endif %}
+
+	{% endif %}
 	{% if app.user %}
+
+		{% if items %}
+
+			<div class="container">
+				<h2>Confirmez votre commande en remplissant ce formulaire</h2>
+				{{ form_start(confirmationForm, {'action': path('purchase_confirm')}) }}
+
+				{{ form_widget(confirmationForm) }}
+
+				<button type="submit" class="btn btn-success">Je confirme !</button>
+
+				{{ form_end(confirmationForm) }}
+			</div>
+		{% endif %}
 		<script>
 			document.getElementById('inscription').style.display = 'none';
 		</script>
