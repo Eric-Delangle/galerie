@@ -9,5 +9,5 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
-import './accueil.js';
+//import './accueil.js';
 //import * as THREE from 'https://unpkg.com/three@<version>/build/three.module.js';

@@ -41,6 +41,7 @@ class PurchasePersister
 
                 ->setPictureName($cartItem['picture']->getName())
                 ->setPicturePrice($cartItem['picture']->getPrice())
+
                 ->setTotal($cartItem['picture']->getPrice());
             //dd($purchaseItem);
 

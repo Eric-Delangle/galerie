@@ -8,8 +8,8 @@ let camera, scene, renderer;
 
 			init();
 			animate();
+	
 
-		
 			function init( ) {
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -96,8 +96,16 @@ let camera, scene, renderer;
 
 				} ); //end load function
 
+
+	// pour que l'animation suive la souris
+
+	let mouseX = 0;
+	window.addEventListener("mousemove", (e) => {
+		mouseX = e.clientX;
+	})
+
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setPixelRatio( mouseX / window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				//const elmt = document.createElement("div");
 				//elmt.className = "app";
@@ -109,7 +117,6 @@ let camera, scene, renderer;
 				controls.update();
 
 				window.addEventListener( 'resize', onWindowResize );
-
 
 			} // end init
 
@@ -136,13 +143,7 @@ let camera, scene, renderer;
 
 			}
 
-	// pour que l'animation suive la souris
-
-	let mouseX = 0;
-	window.addEventListener("mousemove", (e) => {
-		mouseX = e.clientX;
-	})
-
+/*
 	function follow() {
 		const clock = new Clock();
 		const controls = new OrbitControls(camera, renderer.domElement);
@@ -154,6 +155,9 @@ let camera, scene, renderer;
 		const ratio = (mouseX / window.innerWidth - 0.5) * 2;
 		group.rotation.y = ratio * Math.PI * 0.1;  
 	}
-
+follow();
+*/
    
 /* fin animation 3D */
+
+

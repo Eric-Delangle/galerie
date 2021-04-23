@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition du profil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Modifiez vos informations.</h1>
+
+		{#  {{ include('user/_form.html.twig', {'button_label': 'Update'}) }} #}
+
+		<a href="{{ path('user_index') }}">back to list</a>
+
+		{# 	{{ include('user/_delete_form.html.twig') }}  #}
+	</div>
+
+{% endblock %}

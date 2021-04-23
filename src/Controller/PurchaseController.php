@@ -20,10 +20,16 @@ class PurchaseController extends AbstractController
     protected $purchaseRepo;
     protected $persister;
     protected $cartservice;
+    protected $pictureRepo;
 
-    public function __construct(PurchaseRepository $purchaseRepo, PurchasePersister $persister, CartService $cartservice)
-    {
+    public function __construct(
+        PurchaseRepository $purchaseRepo,
+        PurchasePersister $persister,
+        CartService $cartservice,
+        PictureRepository $pictureRepo
+    ) {
         $this->purchaserepo = $purchaseRepo;
+        $this->purchaserepo = $pictureRepo;
         $this->persister = $persister;
         $this->cartservice = $cartservice;
     }
@@ -33,10 +39,12 @@ class PurchaseController extends AbstractController
      */
     public function list(): Response
     {
-
+        $toile = $this->pictureRepo->findAll();
+        //dd($toile);
         $purchases = $this->purchaserepo->findAll();
         return $this->render('purchase/index.html.twig', [
             'purchases' => $purchases,
+            'toile' => $toile
         ]);
     }
 
