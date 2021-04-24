@@ -7,6 +7,18 @@
   font-style: normal;
 }
 
+.bleuMarine {
+  color: #2c748d;
+}
+
+.bleuCiel {
+  color: #64bbbc;
+}
+
+.rose {
+  color: #df8bb4;
+}
+
 body {
   background-color: rgb(247, 245, 245);
   color: #6a686f !important;
@@ -25,7 +37,7 @@ body {
 }
 
 .navbar-expand-lg {
-  height: 200px !important;
+  height: 250px !important;
   min-width: 100% !important;
 }
 
@@ -77,7 +89,6 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  /*margin-left: -150px;*/
 }
 
 #pas_vu:hover {
@@ -225,10 +236,6 @@ p {
 
   .navbar-expand-lg {
     height: 400px !important;
-  }
-
-  .navbar-expand-lg ul {
-    margin-top: 0;
   }
 
   .nom {
