@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\Purchase;
 use App\Cart\CartService;
 use App\Form\PurchaseType;
+use App\Form\CartConfirmationType;
 use App\Purchase\PurchasePersister;
 use App\Repository\PictureRepository;
 use App\Repository\PurchaseRepository;
@@ -57,7 +58,7 @@ class PurchaseController extends AbstractController
         $cart = $this->cartservice->getDetailedCartItems();
         $purchase = new Purchase();
         $this->persister->storePurchase($purchase);
-        $form = $this->createForm(PurchaseType::class, $purchase);
+        $form = $this->createForm(CartConfirmationType::class, $purchase);
         $form->handleRequest($request);
 
 

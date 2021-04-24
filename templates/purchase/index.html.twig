@@ -9,6 +9,12 @@
 		{% for item in purchases %}
 
 			{{ item.fullName }}
+			<p>Elle sera livrée à cette adresse :
+				{{ item.address }}
+				{{ item.postalCode }}
+				{{ item.city }}.
+
+			</p>
 
 
 		{% else %}
