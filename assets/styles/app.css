@@ -93,14 +93,17 @@ body {
 
 #pas_vu:hover {
   background-color: #8cb0b0 !important;
+  border-color: #8cb0b0;
 }
 
 #toiles:hover {
   background-color: #8cb0b0 !important;
+  border-color: #8cb0b0;
 }
 
 #contact:hover {
   background-color: #8cb0b0 !important;
+  border-color: #8cb0b0;
 }
 
 #achats:hover {
@@ -116,6 +119,20 @@ body {
 #connexion:hover {
   background-color: #df8bb4;
   color: white;
+}
+
+#member:hover {
+  background-color: #2c748d;
+  color: white;
+}
+
+#deconnexion:hover {
+  background-color: #df8bb4;
+  color: white;
+}
+
+#connexion:hover i {
+  color: #64bbbc;
 }
 
 h1,

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact
+{% endblock %}
+
+{% block body %}
+	<!-- Contact -->
+	<section id="" class="bg-white">
+
+		<h2 class="text-center mt-3">Contactez moi</h2>
+		<p class="text-center">Je vous répondrai dans les meilleurs delais.
+		</p>
+
+
+		<div
+			class="container text-center">
+			{#<div id="sendmessage">Votre message a bien été envoyé. Merci !</div>#}
+			<div id="errormessage"></div>
+			<div>
+				{{ form_start(form)}}
+				{{ form_row(form.name, {'attr': {'placeholder': "Votre nom"}})}}
+				{{ form_row(form.email, {'attr': {'placeholder': "Votre email"}})}}
+				{{ form_row(form.subject, {'attr': {'placeholder': "Sujet de votre message"}})}}
+				{{ form_row(form.message, {'attr': {'placeholder': "Votre message"}})}}
+
+				<div class="form-group">
+
+					<div class="text-center">
+						<button type="submit" class="btn btn-success btn-lg btn-block">Envoyer un message</button>
+					</div>
+
+				</div>
+
+
+				{{ form_end(form)}}
+			</div>
+		</div>
+
+	</section>
+	<script>
+		document.getElementById('pas_vu').style.display = 'none';
+	</script>
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('member').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('admin').style.display = 'block';
+		</script>
+	{% endif %}
+{% endblock %}
