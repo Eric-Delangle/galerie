@@ -24,6 +24,7 @@ class PurchasePaymentSuccessController extends AbstractController
         // 1. Je récupère la commande
         $purchase = $purchaseRepository->find($id);
 
+
         if (
             !$purchase ||
             ($purchase && $purchase->getUser() !== $this->getUser()) ||

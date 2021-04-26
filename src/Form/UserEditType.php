@@ -15,7 +15,6 @@ class UserEditType extends AbstractType
             ->add('email')
             ->add('firstName')
             ->add('lastName')
-            // ->add('password')
             ->add('adress')
             ->add('codePostal')
             ->add('location')

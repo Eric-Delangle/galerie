@@ -5,19 +5,50 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>Payez votre commande avec Stripe</h1>
-
-		<form id="payment-form">
-			<div id="card-element"><!--Stripe.js injects the Card Element--></div>
-			<button id="submit" class="btn btn-success">
+	<div class="container mt-5">
+		<h1 class="text-center">Régler par carte bancaire.</h1>
+		<form id="payment-form" class="mt-5">
+			<div id="card-element" class="text-center"><!--Stripe.js injects the Card Element--></div>
+			<button id="submit" class="btn btn-success mt-3">
 				<div class="spinner hidden" id="spinner"></div>
-				<span id="button-text">Payer avec Stripe !</span>
+				<span id="button-text">Envoyer</span>
 			</button>
 			<p id="card-error" role="alert"></p>
+
 		</form>
 	</div>
-
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('member').style.display = 'none';
+		</script>
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('admin').style.display = 'block';
+		</script>
+	{% endif %}
 {% endblock %}
 
 {% block javascripts %}

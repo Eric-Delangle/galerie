@@ -50,12 +50,11 @@ class EmailController extends AbstractController
 
             $this->addFlash('success', 'Votre message a bien été envoyé !');
 
-            dump($this->mailer, $message);
 
             $this->mailer->send($message);
 
 
-            return $this->redirectToRoute('member_account');
+            return $this->redirectToRoute('home_base');
         }
 
         return $this->render('email/index.html.twig', [

@@ -16,6 +16,7 @@ class PurchaseSuccessEvent extends Event
 
     public function getPurchase(): Purchase
     {
+        dd($this->purchase);
         return $this->purchase;
     }
 }
