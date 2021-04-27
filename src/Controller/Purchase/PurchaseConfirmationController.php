@@ -70,7 +70,7 @@ class PurchaseConfirmationController extends AbstractController
         // 5. Nous allons créer une Purchase
         /** @var Purchase */
         $purchase = $form->getData();
-        dd($purchase);
+
         $this->persister->storePurchase($purchase);
 
         return $this->redirectToRoute('purchase_payment_form', [

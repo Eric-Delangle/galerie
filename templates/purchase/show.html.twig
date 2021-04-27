@@ -4,16 +4,34 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Votre commande</h1>
+	<h1>Vos commandes</h1>
 
 	<table class="table">
-		<tbody>
-
+		<thead>
 			<tr>
-				<th>Votre commande</th>
-				<td>{{ purchase.fullName }}</td>
+				<th>Nom de la commande</th>
+				<th>Rue de livraison</th>
+				<th>Code postal</th>
+				<th>Ville</th>
+				<th>Total</th>
+				<th>Status</th>
 			</tr>
-
+		</thead>
+		<tbody>
+			{% for item in purchase %}
+				<tr>
+					<td>{{ item.fullName }}</td>
+					<td>{{ user.total }}</td>
+					<td>{{ user.adress }}</td>
+					<td>{{ user.codePostal }}</td>
+					<td>{{ item.city }}</td>
+					<td>{{ item.status }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="12">Pas de commande en cours.</td>
+				</tr>
+			{% endfor %}
 		</tbody>
 	</table>
 

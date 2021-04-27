@@ -1,32 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les commandes
+{% block title %}Vos commandes
 {% endblock %}
 
 {% block body %}
-	<div class="container text-center mt-5">
+	<div class="container text-center mt-5 site-content">
+		<h2>Voici vos commandes :</h2>
+		<hr>
 		{% for item in purchases %}
-			{{ item.fullName }}
+			<p>Nom de votre commande:
+				<strong>{{ item.fullName }}</strong>
+			</p>
+			<p>Elle sera livrée à cette adresse :
+				{{ item.address }}
+				{{ item.postalCode }}
+				{{ item.city }}.
+			</p>
+			<p>Son montant est de
+				<strong>{{ item.total / 10 }}</strong>
+				€.</p>
+			<p>Son status est :
+				{% if item.status == "PAID" %}
+					La commande est réglée.
+				{% endif %}
+				{% if item.status == "PENDING" %}
+					Le réglement est en attente.
+
+				{% endif %}
+				{% if item.status == "CANCELED" %}
+					La commande est annulée.
+				{% endif %}
+			</p>
+			<hr>
 
 		{% else %}
 			<p>Pas de commandes en cours.</p>
 		{% endfor %}
-
-	</div>
-	<script>
-		document.getElementById('inscription').style.display = 'none';
-	</script>
-	<script>
-		document.getElementById('connexion').style.display = 'none';
-	</script>
-	<script>
-		document.getElementById('admin').style.display = 'none';
-	</script>
-	<script>
-		document.getElementById('member').style.display = 'block';
-	</script>
-	<script>
-		document.getElementById('deconnexion').style.display = 'block';
-	</script>
-
-{% endblock %}
+		<a class="nav-link" id="member" href="{{ path('member_account') }}" tabindex="-1" aria-disabled="true">
+			<i class="fas fa-home"></i>
+			Votre compte</a>
+	</p>
+</div>
+<script>
+	document.getElementById('inscription').style.display = 'none';
+</script>
+<script>
+	document.getElementById('connexion').style.display = 'none';
+</script>
+<script>
+	document.getElementById('admin').style.display = 'none';
+</script>
+<script>
+	document.getElementById('member').style.display = 'block';
+</script>
+<script>
+	document.getElementById('deconnexion').style.display = 'block';
+</script>{% endblock %}
