@@ -5,21 +5,22 @@ namespace App\Controller;
 use Swift;
 use App\Entity\Contact;
 use App\Form\ContactType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SwiftmailerBundle\Command\SendEmailCommand;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EmailController extends AbstractController
 {
 
-    /**
-     * @var \Swift Mailer
-     */
+
     private $mailer;
 
 
-    public function __construct(\Swift_Mailer $mailer)
+    public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }
@@ -33,6 +34,7 @@ class EmailController extends AbstractController
 
         $contact = new Contact();
 
+
         $form = $this->createForm(ContactType::class, $contact);
 
 
@@ -41,17 +43,21 @@ class EmailController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $message = (new \Swift_Message($contact))
-                ->setFrom('info@ericdelangle-deco.fr')
-                ->setTo('polvu@hotmail.fr')
-                ->setSubject($contact->getSubject())
-                ->setReplyTo($contact->getEmail())
-                ->setBody($contact->getMessage(), 'text/html');
+
+            $email = new Email();
+            $email->from(new Address("info@ericdelangle-deco.fr", "Eric Delangle"))
+
+                ->to("info@ericdelangle-deco.fr")
+                ->html("<h1>Le mail est envoyé par: " . $contact->getEmail() . "</h1><p>" . $contact->getMessage() . "</p>")
+                ->subject($contact->getSubject());
+
+            $this->mailer->send($email);
+
+
+
 
             $this->addFlash('success', 'Votre message a bien été envoyé !');
 
-
-            $this->mailer->send($message);
 
 
             return $this->redirectToRoute('home_base');
