@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/picture")
+ * @Route("/admin/picture")
  */
 class AdminPictureController extends AbstractController
 {

@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}En cours...
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="text-center">Liste des toiles en cours de réalisation.</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Toile</th>
+					<th>CreatedAt</th>
+					<th>UpdatedAt</th>
+					<th>Description</th>
+					<th>Size</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for encour in encours %}
+					<tr>
+						<td>{{ encour.name }}</td>
+						<td><img src=" {{ asset(['images/toiles/', encour.picture]|join) }} " class="imagesMin" alt="oeuvre"></td>
+						<td>{{ encour.createdAt ? encour.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ encour.updatedAt ? encour.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ encour.description }}</td>
+						<td>{{ encour.size }}</td>
+						<td>
+							<button class="btn btn-primary btn-sm">
+								<a href="{{ path('admin_encours_show', {'id': encour.id}) }}" style="color:white; text-decoration:none;">Voir</a>
+							</button>
+							<button class="btn btn-warning btn-sm">
+								<a href="{{ path('admin_encours_edit', {'id': encour.id}) }}" style=" color:white; text-decoration:none;">Modifier</a>
+							</td>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="9">Pas d'oeuvres en cours.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('admin_encours_new') }}">Ajouter une toile en cours.</a>
+	</div>
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('member').style.display = 'none';
+		</script>
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('admin').style.display = 'block';
+		</script>
+	{% endif %}
+{% endblock %}
