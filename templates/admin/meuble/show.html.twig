@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meuble
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1 class="text-center mt-5">Meuble</h1>
+
+		<table class="table mt-5">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ meuble.id }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ meuble.name }}</td>
+				</tr>
+				<tr>
+					<th>Slug</th>
+					<td>{{ meuble.slug }}</td>
+				</tr>
+				<tr>
+					<th>Image</th>
+					<td><img src=" {{ asset(['images/toiles/', meuble.picture]|join) }} " class="imagesAgrandies" alt="oeuvre"></td>
+				</tr>
+				<tr>
+					<th>Creéé le</th>
+					<td>{{ meuble.createdAt ? meuble.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Modifié le</th>
+					<td>{{ meuble.updatedeAt ? meuble.updatedeAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ meuble.description }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('admin_meuble_index') }}">Retour à la liste.</a>
+
+		<a href="{{ path('admin_meuble_edit', {'id': meuble.id}) }}">Editer</a>
+
+		{{ include('admin/meuble/_delete_form.html.twig') }}
+	</div>
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('member').style.display = 'none';
+		</script>
+	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+		<script>
+			document.getElementById('admin').style.display = 'block';
+		</script>
+	{% endif %}
+{% endblock %}

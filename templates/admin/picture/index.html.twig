@@ -31,7 +31,7 @@
 						<td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ picture.description }}</td>
 						<td>
-							<a href="{{ path('picture_show', {'id': picture.id}) }}">Voir la toile</a>
+							<a href="{{ path('picture_show', {'slug': picture.slug}) }}">Voir la toile</a>
 							<a href="{{ path('picture_edit', {'id': picture.id}) }}">Modifier la toile</a>
 						</td>
 					</tr>

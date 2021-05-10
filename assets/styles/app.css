@@ -19,6 +19,10 @@
   color: #df8bb4;
 }
 
+.blanc {
+  color: #ffffff;
+}
+
 body {
   background-color: rgb(247, 245, 245);
   color: #6a686f !important;
@@ -89,6 +93,13 @@ body {
   border-style: none !important;
 }
 
+.cadre5 {
+  width: auto;
+  padding: 3px;
+  background-color: #f26b58;
+  border-style: none !important;
+}
+
 .nom {
   font-family: alexbrush, century, arial !important;
   font-size: 5em;
@@ -96,6 +107,11 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+#meuble:hover {
+  background-color: #8cb0b0 !important;
+  border-color: #8cb0b0;
 }
 
 #pas_vu:hover {

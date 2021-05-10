@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meuble index
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center mt-5">Gestion des meubles.</h1>
+
+		<table class="table mt-5">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Slug</th>
+					<th>Image</th>
+					<th>Créé le</th>
+					<th>Modifié le</th>
+					<th>Description</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for meuble in meubles %}
+					<tr>
+						<td>{{ meuble.id }}</td>
+						<td>{{ meuble.name }}</td>
+						<td>{{ meuble.slug }}</td>
+						<td>{{ meuble.picture }}</td>
+						<td>{{ meuble.createdAt ? meuble.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ meuble.updatedeAt ? meuble.updatedeAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ meuble.description }}</td>
+						<td>
+							<a href="{{ path('admin_meuble_show', {'id': meuble.id}) }}">Voir</a>
+							<a href="{{ path('admin_meuble_edit', {'id': meuble.id}) }}">Editer</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Pas d'enregistrements trouvés.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<button class="btn btn-primary btn-sm">
+			<a href="{{ path('admin_meuble_new') }}" style="color:black; text-decoration:none;">Nouveau meuble.</a>
+		</button>
+	</div>
+
+{% endblock %}

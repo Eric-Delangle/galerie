@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/picture")
+ * @Route("/")
  */
 class PictureController extends AbstractController
 {
@@ -25,7 +25,7 @@ class PictureController extends AbstractController
     }
 
     /**
-     * @Route("/picture/{id}", name="picture_show", methods={"GET"})
+     * @Route("/picture/{slug}", name="picture_show", methods={"GET"})
      */
     public function show(Picture $picture): Response
     {

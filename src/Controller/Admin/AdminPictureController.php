@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Picture;
 use App\Form\PictureType;
+use Cocur\Slugify\Slugify;
 use App\Repository\PictureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,16 +36,17 @@ class AdminPictureController extends AbstractController
     public function new(Request $request): Response
     {
         $picture = new Picture();
+        $slugify = new Slugify();
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $name = $picture->getName();
+            $slug = $slugify->slugify($picture->getName());
+            $picture->setSlug($slug);
             $picture->setCreatedAt(new \DateTime());
             $picture->setUpdatedAt(new \DateTime());
-            $picture->setSlug($name);
             $entityManager->persist($picture);
             $entityManager->flush();
 

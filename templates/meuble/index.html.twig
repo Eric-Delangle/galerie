@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les toiles !
+{% block title %}Les meubles !
 {% endblock %}
 
 {% block body %}
 
 	<div id="#bloc-images" class="container">
-		<h1 class="text-center mt-5 brun">La galerie</h1>
+		<h1 class="text-center mt-5 brun">Les meubles</h1>
 
 		<div id="portfolio" class="mt-5">
-			{% for picture in pictures %}
+			{% for meuble in meubles %}
 
 				<figure class="images">
-					<a href="{{ path('picture_show', {'slug': picture.slug}) }}"><img src=" {{ asset(['images/toiles/', picture.picture]|join) }} " class="images" alt="oeuvre"></a>
+					<a href="{{ path('meuble_show', {'slug': meuble.slug}) }}"><img src=" {{ asset(['images/toiles/', meuble.picture]|join) }} " class="images" alt="oeuvre"></a>
 					<figcaption>
 						<div class="titre-legende text-center">
-							<h3>{{ picture.name | capitalize}}</h3>
-							<p>{{ picture.description | capitalize}}</p>
+							<h3>{{ meuble.name | capitalize}}</h3>
+							<p>{{ meuble.description | capitalize}}</p>
 
 						</div>
 					</figcaption>

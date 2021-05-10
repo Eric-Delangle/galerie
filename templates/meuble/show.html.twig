@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La galerie meubles
+{% endblock %}
+
+{% block body %}
+	<div class="container text-center mt-5">
+		<h1>Voici en détail
+			{{ meuble.name }}</h1>
+
+
+		<h2>Description :
+			{{ meuble.description }}</h2>
+
+		<p>
+			Ce meuble est vendu , si une envie vous vient n'hésitez pas à m'en faire part, je peux tout à fait réaliser la déco de votre choix.
+			        Soit vous avez un meuble soit je vous le trouve, il y a toujours une solution.
+		</p>
+		<img src=" {{ asset(['images/toiles/', meuble.picture]|join) }} " class="imagesAgrandies" alt="oeuvre">
+		<br>
+		<div class="col mt-3">
+			<button class="btn btn-primary bouton">
+				<a href="{{ path('meuble_index') }}">Retour à la galerie.</a>
+			</button>
+
+		</div>
+
+	</div>
+
+	{% if app.user %}
+		<script>
+			document.getElementById('inscription').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+	{% else %}
+		<script>
+			document.getElementById('inscription').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('connexion').style.display = 'block';
+		</script>
+		<script>
+			document.getElementById('admin').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('deconnexion').style.display = 'none';
+		</script>
+		<script>
+			document.getElementById('member').style.display = 'none';
+		</script>
+	{% endif %}
+	<script>
+		document.getElementById('footer').style.display = 'none';
+	</script>
+{% endblock %}

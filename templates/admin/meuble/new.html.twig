@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Meuble
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center mt-5">Nouveau meuble.</h1>
+
+		{{ include('admin/meuble/_form.html.twig') }}
+
+		<a href="{{ path('admin_meuble_index') }}">Retour à la liste</a>
+	</div>
+	<script>
+		document.getElementById('inscription').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('connexion').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('admin').style.display = 'none';
+	</script>
+	<script>
+		document.getElementById('member').style.display = 'block';
+	</script>
+	<script>
+		document.getElementById('deconnexion').style.display = 'block';
+	</script>
+
+{% endblock %}
