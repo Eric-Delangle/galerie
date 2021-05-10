@@ -24,7 +24,7 @@ class EncoursController extends AbstractController
     }
 
     /**
-     * @Route("/encours/{id}", name="encours_show", methods={"GET"})
+     * @Route("/encours/{slug}", name="encours_show", methods={"GET"})
      */
 
     public function show(Encours $encour): Response

@@ -12,6 +12,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SwiftmailerBundle\Command\SendEmailCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use ReCaptcha\ReCaptcha;
 
 class EmailController extends AbstractController
 {
@@ -39,30 +40,35 @@ class EmailController extends AbstractController
 
 
         $form->handleRequest($request);
+        /* captcha */
 
+        $recaptcha = new ReCaptcha('6LeGor4aAAAAAEROt0YUsp0L77m4KlNxtLgPPSTi');
+        $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$resp->isSuccess()) {
+                $this->addFlash('warning', 'N\'oubliez pas de cocher la case "Je ne suis pas un robot"');
+            } else {
 
+                $email = new Email();
+                $email->from(new Address("info@ericdelangle-deco.fr", "Eric Delangle"))
 
-            $email = new Email();
-            $email->from(new Address("info@ericdelangle-deco.fr", "Eric Delangle"))
+                    ->to("info@ericdelangle-deco.fr")
+                    ->html("<h1>Le mail est envoyé par: " . $contact->getEmail() . "</h1><p>" . $contact->getMessage() . "</p>")
+                    ->subject($contact->getSubject());
 
-                ->to("info@ericdelangle-deco.fr")
-                ->html("<h1>Le mail est envoyé par: " . $contact->getEmail() . "</h1><p>" . $contact->getMessage() . "</p>")
-                ->subject($contact->getSubject());
-
-            $this->mailer->send($email);
-
-
-
-
-            $this->addFlash('success', 'Votre message a bien été envoyé !');
+                $this->mailer->send($email);
 
 
 
-            return $this->redirectToRoute('home_base');
+
+                $this->addFlash('success', 'Votre message a bien été envoyé !');
+
+
+
+                return $this->redirectToRoute('home_base');
+            }
         }
-
         return $this->render('email/index.html.twig', [
             'form' => $form->createView()
         ]);

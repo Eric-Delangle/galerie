@@ -21,8 +21,9 @@
 				{{ form_row(form.name, {'attr': {'placeholder': "Votre nom"}})}}
 				{{ form_row(form.email, {'attr': {'placeholder': "Votre email"}})}}
 				{{ form_row(form.subject, {'attr': {'placeholder': "Sujet de votre message"}})}}
-				{{ form_row(form.message, {'attr': {'placeholder': "Votre message"}})}}
-
+				{{ form_row(form.message, {'attr': {'placeholder': "Votre message"}})}}<!-- captcha -->
+				<!-- Notre boite de vérification --><div class="g-recaptcha" data-sitekey="6LeGor4aAAAAAL80iH6M8nm0v4-RnnYog7H2_PcB"> </div>
+				<!-- fin captcha -->
 				<div class="form-group">
 
 					<div class="text-center">
@@ -30,14 +31,14 @@
 					</div>
 
 				</div>
-
-
 				{{ form_end(form)}}
 			</div>
 		</div>
 
 	</section>
-
+	<script>
+		document.getElementById('contact').style.display = 'none';
+	</script>
 	{% if app.user %}
 		<script>
 			document.getElementById('inscription').style.display = 'none';

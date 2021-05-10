@@ -7,7 +7,7 @@
 	<div class="container mt-5">
 		<h1 class="text-center">Liste des toiles en cours de réalisation.</h1>
 		<p class="text-center mt-3">J'aime commencer des toiles. Lorsqu'une idée me vient j'ai besoin de démarrer tout de suite , après j'aime prendre le temps.
-									Si une des toiles en cours vous tente, envoyez moi un message et j'accelererai sa conception.
+																								Si une des toiles en cours vous tente, envoyez moi un message et j'accelererai sa conception.
 		</p>
 		<table class="table mt-3">
 			<thead>
@@ -28,7 +28,7 @@
 						<td>{{ encour.size }}</td>
 						<td>
 							<button class="btn btn-primary btn-sm">
-								<a href="{{ path('encours_show', {'id': encour.id}) }}" style="color:white; text-decoration:none;">Voir</a>
+								<a href="{{ path('encours_show', {'slug': encour.slug}) }}" style="color:white; text-decoration:none;">Voir</a>
 							</button>
 						</td>
 					</tr>
@@ -49,4 +49,4 @@ document.getElementById('connexion').style.display = 'block';</script><script>
 document.getElementById('admin').style.display = 'none';</script><script>
 document.getElementById('deconnexion').style.display = 'none';</script><script>
 document.getElementById('member').style.display = 'none';</script>{% endif %}{% if is_granted('ROLE_ADMIN') %}<script>
-document.getElementById('admin').style.display = 'block';</script>{% endif %}{% endblock %}
+document.getElementById('admin').style.display = 'block';</script>{% endif %}<script>document.getElementById('encours').style.display = 'none';</script>{% endblock %}
